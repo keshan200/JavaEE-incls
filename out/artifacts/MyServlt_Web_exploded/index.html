@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX Example</title>
+</head>
+<body>
+
+<h1>AJAX Example Project</h1>
+<p id="para">this is an example project for ajax</p>
+<button id="btn">send an ajax request</button>
+<img id="img" src="">
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Body</th>
+    </tr>
+    </thead>
+    <tbody id="tbl">
+    </tbody>
+</table>
+
+
+
+<script src="assets/js/jquery-3.7.1.min.js"></script>
+<!--ajax-->
+<!--<script>
+    $('#btn').click(()=>{
+
+        console.log("Request Started")
+
+        let http = new XMLHttpRequest();
+        console.log(http.readyState,"After the XMLHttpRequest Object Created");//
+
+        const img = "images/git.png";
+
+        http.open("GET","db/db.txt",false);
+       /* console.log(http.readyState,"After Open Method invoke");
+        console.log(http.responseText);
+        console.log(http.readyState,"After the RESPONSE text Printed")*/
+
+        http.send(); //send ajax request
+       /* console.log(http.readyState,"After the SEND text Printed")
+*/
+        http.onreadystatechange = ()=>{
+          /*  console.log(http.readyState,"Inside on ReadyStatus change event")*/
+            if (http.readyState === 4 && http.status === 200){
+                /*$('#img').attr('src',img);*/
+                $('#para').text(http.responseText)
+                console.log("process")
+            }
+        }
+        console.log("Request Finished")
+    })
+</script>-->
+
+<!--ajax short method & fake api-->
+<!--<script>
+
+
+    $('#btn').click(()=>{
+        console.log('started')
+        $.ajax({
+            url:'https://jsonplaceholder.typicode.com/comments/1',
+            method : "GET",
+            async : false,
+
+            success:(response)=>{
+              $('#para').text(response);
+              console.log(response)
+
+                response.slice(0)loadData = ()=>{
+                    url.map((a)=> {
+                        let row = `
+                    <tr>
+                        <td>${a.id}</td>
+                        <td>${a.name}</td>
+                        <td>${a.email}</td>
+                        <td>${a.body}</td>
+                    </tr>
+                `;
+
+                        $('#tbl').append(row);
+                    })
+
+                }
+            },
+            error: (error) => {
+                console.log(error)
+            }
+        })
+        console.log('ended')
+    })
+    /**/
+
+
+</script>-->
+<script>
+    $('#btn').click(() => {
+        console.log('Request started');
+        $.ajax({
+            url: 'http://localhost:8080/MyServlt_Web_exploded/new',
+            method: 'POST',
+
+            success: (response) => {
+
+                $('#tbl').empty();
+
+               /* response.forEach((d) => {
+                    let data = `
+                    <tr>
+                        <td>${d.id}</td>
+                        <td>${d.name}</td>
+                        <td>${d.email}</td>
+                        <td>${d.body}</td>
+                    </tr>
+                `;
+                    $('#tbl').append(data);
+                });*/
+
+                console.log('Data loaded successfully');
+            },
+            error: (error) => {
+                console.error('Error loading data:', error);
+            }
+        });
+
+        console.log('Request ended');
+    });
+
+</script>
+
+
+<!--sync & async-->
+<!--<script>
+    //synchronous
+    console.log('start')
+    console.log('middle')
+    console.log('ending')
+
+
+    //assinchorius
+    console.log('start')
+    setTimeout(()=>{
+        console.log('middle')
+    },2000)
+
+
+    console.log('ending')
+
+</script>-->
+
+</body>
+</html>
