@@ -19,7 +19,9 @@ public class Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-   /*     BasicDataSource basicDataSource = new BasicDataSource();
+
+
+   /*   BasicDataSource basicDataSource = new BasicDataSource();
         basicDataSource.setDriverClassName("com.mysql.jdbc.Driver");
         basicDataSource.setUrl("jdbc:mysql://localhost:3306/company");
         basicDataSource.setUsername("root");
@@ -56,10 +58,7 @@ public class Servlet extends HttpServlet {
             System.out.println("errorr>>>>"+e.getMessage());
             throw new RuntimeException(e);
         }
-
-
         System.out.println("DBCP");
-
     }
 
 
@@ -89,7 +88,6 @@ public class Servlet extends HttpServlet {
             System.out.println("errorr>>>>"+e.getMessage());
             throw new RuntimeException(e);
         }
-
 
     }
 }
