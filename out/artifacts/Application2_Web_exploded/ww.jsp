@@ -12,10 +12,10 @@
 </head>
 <body>
 
-<%!
-    public String getMessage(){
-        return "hello";
-    }
+
+<%
+
+    System.out.println("sd");
 
 
 

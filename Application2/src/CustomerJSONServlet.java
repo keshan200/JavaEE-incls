@@ -78,6 +78,8 @@ public class CustomerJSONServlet extends HttpServlet {
         try {
              connection = dataSource.getConnection();
             PreparedStatement pstm = connection.prepareStatement("INSERT INTO customer (id, name, address) VALUES (?, ?, ?)");
+            connection.setAutoCommit(false);
+
             pstm.setString(1, id);
             pstm.setString(2, name);
             pstm.setString(3, address);
@@ -100,6 +102,9 @@ public class CustomerJSONServlet extends HttpServlet {
             resp.setContentType("application/json");
             resp.getWriter().write(response.build().toString());
 
+
+            connection.commit();
+            System.out.println("Transaction committed successfully!");
         } catch (SQLException e) {
 
             JsonObjectBuilder response = Json.createObjectBuilder();
@@ -110,13 +115,16 @@ public class CustomerJSONServlet extends HttpServlet {
             resp.setContentType("application/json");
             resp.getWriter().write(response.build().toString());
         }finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
 
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+            if (connection != null) {
+                try {
+                    System.out.println("closed");
+                    connection.close();
+                    connection.commit();
+                } catch (Exception e) {
+                    System.out.println("error???"+e.getMessage());
+                    e.printStackTrace();
+                }
             }
         }
     }
